@@ -39,13 +39,13 @@ def py_display(text='is_cool'):
 
 
 @app.route("/number/<int:n>")
-def num_display(n):
+def text_if_int(n):
     """Displays text if integer is given."""
     return f"{n} is a number"
 
 
 @app.route("/number_template/<int:n>")
-def template_num(n):
+def html_if_int(n):
     "Displays html page only if int is given"
     return render_template("5-number.html", num=n)
 
