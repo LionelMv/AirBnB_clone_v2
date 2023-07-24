@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-# This scripts starts a Flask web app.
-# The web app must be listening on 0.0.0.0:5000
+"""
+This scripts starts a Flask web app.
+The web app must be listening on 0.0.0.0:5000
+"""
 
 from flask import Flask
 
@@ -8,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-def hello_hbnb():
+def hello():
     """diplays Hello HBNB!"""
     return "Hello HBNB!"
 
