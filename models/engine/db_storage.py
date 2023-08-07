@@ -52,7 +52,7 @@ class DBStorage:
         db_dict = {}
         for obj in objs:
             # k = f"{type(obj).__name__}.{obj.id}"
-            k = f"{obj.__class__.name}.{obj.id}"
+            k = f"{obj.__class__.__name__}.{obj.id}"
             db_dict[k] = obj
         return db_dict
 
