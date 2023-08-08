@@ -8,12 +8,14 @@ from models.review import Review
 from sqlalchemy import String, Column, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 
-place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), ForeignKey("places.id"),
-                             primary_key=True, nullable=False),
-                      Column('amenity_id', String(60),
-                             ForeignKey("amenities.id"),
-                             primary_key=True, nullable=False))
+if getenv("HBNB_TYPE_STORAGE") == "db":
+    place_amenity = Table('place_amenity', Base.metadata,
+                          Column('place_id', String(60),
+                                 ForeignKey("places.id"),
+                                 primary_key=True, nullable=False),
+                          Column('amenity_id', String(60),
+                                 ForeignKey("amenities.id"),
+                                 primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -36,7 +38,8 @@ class Place(BaseModel, Base):
                                cascade='all, delete-orphan')
         amenities = relationship('Amenity',
                                  secondary='place_amenity',
-                                 back_populates='place_amenities', viewonly=False)
+                                 back_populates='place_amenities',
+                                 viewonly=False)
 
     else:
         @property
