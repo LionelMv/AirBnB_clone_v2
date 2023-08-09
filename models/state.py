@@ -13,12 +13,14 @@ from sqlalchemy.orm import relationship
 class State(BaseModel, Base):
     """Manages State objects."""
     __tablename__ = "states"
-    name = Column(String(128), nullable=False)
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state",
                               cascade="all, delete, delete-orphan")
     else:
+        name = ""
+
         @property
         def cities(self):
             """Getter attribute in case of file storage"""
