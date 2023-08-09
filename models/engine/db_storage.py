@@ -42,8 +42,9 @@ class DBStorage:
         """Returns dictionary with all objects depending
         of the class name (argument cls)"""
         if cls:
-            # Any other way of implementing models.classes?
-            objs = self.__session.query(DBStorage.classes[cls]).all()
+            if type(cls) == str:
+                cls = eval(cls)
+            objs = self.__session.query(cls).all()
         else:
             for key, value in DBStorage.classes.items():
                 if key != "BaseModel":
